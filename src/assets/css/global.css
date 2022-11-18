@@ -1,0 +1,13 @@
+* {
+  margin : 0;
+  padding: 0;
+}
+
+body {
+  background: url(../images/bg.jpg) no-repeat top center;
+}
+
+@font-face {
+  font-family: lcdd;
+  src: url(../fonts/DS-DIGIT.TTF);
+}

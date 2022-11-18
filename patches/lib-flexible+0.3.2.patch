@@ -1,0 +1,19 @@
+diff --git a/node_modules/lib-flexible/flexible.js b/node_modules/lib-flexible/flexible.js
+index c748ed9..c1382cc 100644
+--- a/node_modules/lib-flexible/flexible.js
++++ b/node_modules/lib-flexible/flexible.js
+@@ -71,7 +71,13 @@
+         if (width / dpr > 540) {
+             width = 540 * dpr;
+         }
+-        var rem = width / 10;
++        // 最小1366px 最大适配2560
++        /* if (width / dpr < 1366) {
++          width = 1366 * dpr;
++        }else if (width / dpr > 2560) {
++          width = 2560 * dpr
++        } */
++        var rem = width / 24;
+         docEl.style.fontSize = rem + 'px';
+         flexible.rem = win.rem = rem;
+     }
