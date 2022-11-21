@@ -3,7 +3,9 @@
     <div class="column">
       <div class="panel bar">
         <h2>柱形图-就业行业</h2>
-        <div class="chart"></div>
+        <div class="chart">
+          <chart-bar-left ref="chartBarLeft"></chart-bar-left>
+        </div>
         <div class="panel-bottom"></div>
       </div>
       <div class="panel line">
@@ -55,11 +57,36 @@
 </template>
 
 <script>
+import ChartBarLeft from '@/components/ChartBarLeft'
 export default {
-  name: 'MyCenter'
+  name: 'MyCenter',
+  components: {
+    ChartBarLeft
+  },
+  mounted() {
+    const _this = this // 缓存vue实例
+    // 节流函数
+    function throttle(fn, wait) {
+      let timer = null
+      // debugger
+      return function () {
+        if (!timer) {
+          timer = setTimeout(() => {
+            fn()
+            timer = null
+          }, wait)
+        }
+      }
+    }
+    window.addEventListener(
+      'resize',
+      throttle(function () {
+        _this.$bus.$emit('chartResize')
+      }, 100)
+    )
+  }
 }
 </script>
-
 <style lang="less" scoped>
 .main-box {
   display: flex;
@@ -116,7 +143,7 @@ export default {
 
       .chart {
         height: 240px;
-        background: skyblue;
+        // background: skyblue;
       }
 
       .panel-bottom {
